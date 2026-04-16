@@ -8,7 +8,8 @@ import { Category } from '../../../api/routemisr.type/routemisr.type';
 
 import {
     ShoppingCart, Heart, Menu, Search, X, ChevronRight, LogOut,
-    Settings, Package, User as UserIcon, MapPin, ChevronDown
+    Settings, Package, User as UserIcon, MapPin, ChevronDown,
+    Headset
 } from 'lucide-react';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -165,41 +166,122 @@ export default function Navbar() {
                         </div>
 
                         {/* Mobile Menu - تم إضافة دعم الـ Categories للموبايل */}
+                        {/* Mobile Menu Trigger */}
                         <Sheet open={open} onOpenChange={setOpen}>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="md:hidden text-gray-700">
+                                <Button variant="ghost" size="icon" className="md:hidden">
                                     <Menu size={28} />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="w-[300px] p-0 overflow-y-auto">
-                                <div className="flex flex-col h-full">
-                                    <div className="p-6 border-b flex items-center justify-between bg-green-600 text-white">
-                                        <span className="text-xl font-black">FreshCart</span>
-                                        <X size={24} className="cursor-pointer" onClick={() => setOpen(false)} />
-                                    </div>
-                                    <div className="flex-1 py-4">
-                                        <NextLink href="/" onClick={() => setOpen(false)} className="flex items-center justify-between px-8 py-4 text-gray-700 hover:bg-green-50 border-b border-gray-50 font-bold">Home <ChevronRight size={18} /></NextLink>
-                                        <NextLink href="/shop" onClick={() => setOpen(false)} className="flex items-center justify-between px-8 py-4 text-gray-700 hover:bg-green-50 border-b border-gray-50 font-bold">Shop <ChevronRight size={18} /></NextLink>
+                            <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0 border-none shadow-2xl">
+                                <div className="flex flex-col h-full bg-white">
 
-                                        {/* Categories Mobile List (Optional but better) */}
-                                        <div className="px-8 py-4 text-xs font-black uppercase text-gray-400 tracking-widest">Categories</div>
-                                        {categories.slice(0, 5).map((cat) => (
-                                            <NextLink key={cat._id} href={`/categorydetailes/${cat._id}`} onClick={() => setOpen(false)} className="flex items-center justify-between px-10 py-3 text-gray-600 hover:text-green-600 text-sm font-medium">
-                                                {cat.name} <ChevronRight size={14} />
-                                            </NextLink>
-                                        ))}
+                                    {/* Header Menu */}
+                                    <div className="flex items-center justify-between p-5 border-b">
+                                        <div className="flex items-center gap-2 text-green-600">
+                                            <ShoppingCart size={24} strokeWidth={2.5} />
+                                            <span className="text-xl font-black text-gray-900">FreshCart</span>
+                                        </div>
+                                        <Button variant="ghost" size="icon" onClick={() => setOpen(false)} className="rounded-full bg-gray-50">
+                                            <X size={20} />
+                                        </Button>
+                                    </div>
 
-                                        <NextLink href="/brands" onClick={() => setOpen(false)} className="flex items-center justify-between px-8 py-4 text-gray-700 hover:bg-green-50 border-b border-gray-50 font-bold">Brands <ChevronRight size={18} /></NextLink>
+                                    {/* Mobile Search - Same as Image */}
+                                    <div className="p-5">
+                                        <div className="relative">
+                                            <Input
+                                                placeholder="Search products..."
+                                                className="pr-10 h-12 bg-white border-gray-200"
+                                            />
+                                            <div className="absolute right-1 top-1/2 -translate-y-1/2 bg-green-600 text-white p-2 rounded-md">
+                                                <Search size={18} />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="p-8 border-t bg-gray-50">
-                                        {status !== "authenticated" ? (
-                                            <NextLink href="/login" onClick={() => setOpen(false)}>
-                                                <Button className="w-full bg-green-600 h-14 rounded-xl font-bold">Sign In</Button>
+
+                                    {/* Nav Links */}
+                                    <div className="flex-1 overflow-y-auto px-5 pb-5">
+                                        <div className="space-y-1 mb-6">
+                                            <NextLink href="/" onClick={() => setOpen(false)} className="block py-3 px-4 text-gray-700 font-medium hover:bg-green-50 rounded-lg transition-colors">Home</NextLink>
+                                            <NextLink href="/shop" onClick={() => setOpen(false)} className="block py-3 px-4 text-gray-700 font-medium hover:bg-green-50 rounded-lg transition-colors">Shop</NextLink>
+                                            <NextLink href="/categories" onClick={() => setOpen(false)} className="block py-3 px-4 text-green-600 font-bold bg-green-50 rounded-lg">Categories</NextLink>
+                                            <NextLink href="/brands" onClick={() => setOpen(false)} className="block py-3 px-4 text-gray-700 font-medium hover:bg-green-50 rounded-lg transition-colors">Brands</NextLink>
+                                        </div>
+
+                                        <div className="h-[1px] bg-gray-100 my-4" />
+
+                                        {/* Activity Section (Wishlist/Cart) */}
+                                        <div className="space-y-4">
+                                            <NextLink href="/wishlist" onClick={() => setOpen(false)} className="flex items-center justify-between py-2 group">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+                                                        <Heart size={20} />
+                                                    </div>
+                                                    <span className="font-medium text-gray-700">Wishlist</span>
+                                                </div>
+                                                <span className="w-6 h-6 bg-red-500 text-white text-[11px] font-bold flex items-center justify-center rounded-full">{wishlistCount}</span>
                                             </NextLink>
-                                        ) : (
-                                            <Button variant="outline" className="w-full border-red-200 text-red-600 h-14 rounded-xl font-bold" onClick={() => signOut()}>Sign Out</Button>
-                                        )}
+
+                                            <NextLink href="/cart" onClick={() => setOpen(false)} className="flex items-center justify-between py-2 group">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                                                        <ShoppingCart size={20} />
+                                                    </div>
+                                                    <span className="font-medium text-gray-700">Cart</span>
+                                                </div>
+                                                <span className="w-6 h-6 bg-green-600 text-white text-[11px] font-bold flex items-center justify-center rounded-full">{cartCount}</span>
+                                            </NextLink>
+                                        </div>
+
+                                        <div className="h-[1px] bg-gray-100 my-4" />
+
+                                        {/* User Section */}
+                                        <div className="space-y-4">
+                                            {status === "authenticated" ? (
+                                                <>
+                                                    <div className="flex items-center gap-4 py-2">
+                                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
+                                                            <UserIcon size={20} />
+                                                        </div>
+                                                        <span className="font-medium text-gray-700">{session?.user?.name}</span>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => signOut()}
+                                                        className="flex items-center gap-4 py-2 text-red-500 w-full"
+                                                    >
+                                                        <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                                                            <LogOut size={20} />
+                                                        </div>
+                                                        <span className="font-medium">Sign Out</span>
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <div className="grid grid-cols-2 gap-3 mt-4">
+                                                    <NextLink href="/login" onClick={() => setOpen(false)}>
+                                                        <Button variant="outline" className="w-full rounded-lg">Sign In</Button>
+                                                    </NextLink>
+                                                    <NextLink href="/register" onClick={() => setOpen(false)}>
+                                                        <Button className="w-full bg-green-600 rounded-lg">Register</Button>
+                                                    </NextLink>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
+
+                                    {/* Footer Support - Like Image */}
+                                    <div className="p-5 mt-auto">
+                                        <div className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl bg-gray-50/50">
+                                            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                                <Headset size={20} />
+                                            </div>
+                                            <div>
+                                                <p className="text-[12px] text-gray-500 font-medium">Need Help?</p>
+                                                <p className="text-sm font-bold text-green-600 cursor-pointer">Contact Support</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </SheetContent>
                         </Sheet>
