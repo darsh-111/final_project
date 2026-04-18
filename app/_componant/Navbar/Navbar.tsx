@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import NextLink from 'next/link';
-// استيراد الـ Service والـ Type بتوعك
 import { getallcategories } from '@/api/routemisr.service/routemisr.servece';
 import { Category } from '../../../api/routemisr.type/routemisr.type';
 
@@ -12,7 +11,8 @@ import {
     Headset
 } from 'lucide-react';
 
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+// أضفت الـ SheetHeader والـ SheetTitle والـ SheetDescription هنا
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSession, signOut } from "next-auth/react";
@@ -40,11 +40,10 @@ export default function Navbar() {
         async function fetchCats() {
             try {
                 const data = await getallcategories();
-                // هنا بنقوله: لو data موجودة استخدمها، لو مش موجودة ابعت مصفوفة فاضية []
                 setCategories(data || []);
             } catch (error) {
                 console.error("Navbar categories error:", error);
-                setCategories([]); // في حالة الخطأ بنحط مصفوفة فاضية عشان الـ TS ميزعلش
+                setCategories([]);
             }
         }
         fetchCats();
@@ -91,7 +90,6 @@ export default function Navbar() {
                             <NextLink href="/" className="hover:text-green-600 transition-colors">Home</NextLink>
                             <NextLink href="/shop" className="hover:text-green-600 transition-colors">Shop</NextLink>
 
-                            {/* Dropdown Categories - تم ربط المسار بصفحة الـ ID */}
                             <DropdownMenu modal={false}>
                                 <DropdownMenuTrigger className="flex items-center gap-1 hover:text-green-600 transition-colors focus:outline-none py-2 outline-none">
                                     Categories <ChevronDown size={14} />
@@ -105,7 +103,6 @@ export default function Navbar() {
                                     <DropdownMenuSeparator />
                                     {categories?.map((category) => (
                                         <DropdownMenuItem key={category._id} asChild className="focus:bg-green-50 focus:text-green-600 py-2.5 cursor-pointer">
-                                            {/* الربط بصفحة الـ CategoryProducts */}
                                             <NextLink href={`/categorydetailes/${category._id}`}>{category.name}</NextLink>
                                         </DropdownMenuItem>
                                     ))}
@@ -165,8 +162,7 @@ export default function Navbar() {
                             )}
                         </div>
 
-                        {/* Mobile Menu - تم إضافة دعم الـ Categories للموبايل */}
-                        {/* Mobile Menu Trigger */}
+                        {/* Mobile Menu */}
                         <Sheet open={open} onOpenChange={setOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="ghost" size="icon" className="md:hidden">
@@ -174,8 +170,14 @@ export default function Navbar() {
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0 border-none shadow-2xl">
-                                <div className="flex flex-col h-full bg-white">
 
+                                {/* 🟢 السطر ده هو اللي حل المشكلة: Accessibility Headers */}
+                                <SheetHeader className="sr-only">
+                                    <SheetTitle>Navigation Menu</SheetTitle>
+                                    <SheetDescription>Mobile navigation links and user actions</SheetDescription>
+                                </SheetHeader>
+
+                                <div className="flex flex-col h-full bg-white">
                                     {/* Header Menu */}
                                     <div className="flex items-center justify-between p-5 border-b">
                                         <div className="flex items-center gap-2 text-green-600">
@@ -187,7 +189,7 @@ export default function Navbar() {
                                         </Button>
                                     </div>
 
-                                    {/* Mobile Search - Same as Image */}
+                                    {/* Mobile Search */}
                                     <div className="p-5">
                                         <div className="relative">
                                             <Input
@@ -211,7 +213,7 @@ export default function Navbar() {
 
                                         <div className="h-[1px] bg-gray-100 my-4" />
 
-                                        {/* Activity Section (Wishlist/Cart) */}
+                                        {/* Activity Section */}
                                         <div className="space-y-4">
                                             <NextLink href="/wishlist" onClick={() => setOpen(false)} className="flex items-center justify-between py-2 group">
                                                 <div className="flex items-center gap-4">
@@ -269,7 +271,7 @@ export default function Navbar() {
                                         </div>
                                     </div>
 
-                                    {/* Footer Support - Like Image */}
+                                    {/* Footer Support */}
                                     <div className="p-5 mt-auto">
                                         <div className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl bg-gray-50/50">
                                             <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
@@ -281,7 +283,6 @@ export default function Navbar() {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </SheetContent>
                         </Sheet>
