@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useCart } from "@/Context/CartContext"
 import { CheckoutOrder } from "@/actions/checkout.actions"
 import { GetUserAddresses } from "@/actions/address.actions"
@@ -11,6 +12,7 @@ import {
 import Image from "next/image"
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { cartId, cartItems, cartTotal, setCartCount } = useCart();
   const [loading, setLoading] = useState(false);
   const [fetchingAddresses, setFetchingAddresses] = useState(true);
@@ -74,13 +76,12 @@ export default function CheckoutPage() {
         if (paymentMethod === 'cash') {
           // --- حالة الدفع كاش ---
           toast.success("Order placed successfully!");
-          setCartCount(0); // تصفير السلة
-          window.location.href = "/allorders"; // تحويل لصفحة الطلبات
+          setCartCount(0);
+          router.push("/allorders");
         } else {
           // --- حالة الدفع أونلاين (Stripe) ---
           if (res.session?.url) {
             toast.info("Redirecting to Stripe...");
-            // تحويل المستخدم لرابط Stripe الرسمي
             window.location.href = res.session.url;
           } else {
             toast.error("Stripe session URL not found");

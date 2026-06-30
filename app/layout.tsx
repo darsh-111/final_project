@@ -1,11 +1,11 @@
 // 🟢 شيلنا "use client" من هنا
-import Navbar from "./_componant/Navbar/Navbar";
-import TopNavbar from "./_componant/TopNavbar/TopNavbar";
+import Navbar from "./_components/Navbar/Navbar";
+import TopNavbar from "./_components/TopNavbar/TopNavbar";
 import "./globals.css"
-import Providers from "./_componant/Provider/Provider"; // الملف اللي عملناه فوق
+import Providers from "./_components/Provider/Provider";
 import CartContextProvider from "@/Context/CartContext";
 import WishlistContextProvider from "@/Context/wishlistContext";
-import Footer from "./_componant/Footer/Footer";
+import Footer from "./_components/Footer/Footer";
 
 export const metadata = {
   title: "FreshCart",

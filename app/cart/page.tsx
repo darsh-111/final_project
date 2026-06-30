@@ -1,5 +1,5 @@
-import { GetLoggedUserCart } from "@/actions/card.actions";
-import CartDisplay from "../_componant/CartDisplay/CartDisplay"; // هنكريت الـ component ده
+import { GetLoggedUserCart } from "@/actions/cart.actions";
+import CartDisplay from "../_components/CartDisplay/CartDisplay";
 
 export default async function CartPage() {
   // 1. هات الداتا في السيرفر

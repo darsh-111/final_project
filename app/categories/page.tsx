@@ -1,7 +1,7 @@
 import React from 'react';
 import { LayoutGrid, ChevronRight } from 'lucide-react';
-import { Category } from '@/api/routemisr.type/routemisr.type';
-import { getallcategories } from '@/api/routemisr.service/routemisr.servece';
+import { Category } from '@/api/routemisr.types/routemisr.types';
+import { getallcategories } from '@/api/routemisr.service/routemisr.service';
 import Link from 'next/link';
 
 // 1. كومبونانت الكارت المنفرد (CategoryCard)

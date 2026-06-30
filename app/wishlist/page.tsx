@@ -1,5 +1,5 @@
 import { GetLoggedUserWishlist } from "@/actions/wishlist.actions";
-import WishlistDisplay from "../_componant/WishlistDisplay/WishlistDisplay";
+import WishlistDisplay from "../_components/WishlistDisplay/WishlistDisplay";
 
 export default async function wishlist() {
   // الطلب بيتم من السيرفر مباشرة

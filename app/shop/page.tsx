@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { GetAllProducts } from "../../actions/product.actions";
 import { Home, ChevronRight, Package, Loader2 } from "lucide-react";
-import ProductCard from "@/app/_componant/ProductCard/ProductCard";
+import ProductCard from "@/app/_components/ProductCard/ProductCard";
 import Link from "next/link";
 
 export default function ShopPage() {

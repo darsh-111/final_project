@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect, ReactNode, useRef, useCallback } from "react";
-import { GetLoggedUserCart, Addtocard } from "@/actions/card.actions";
+import { GetLoggedUserCart, Addtocard } from "@/actions/cart.actions";
 import { useSession } from "next-auth/react";
 
 interface CartContextType {
@@ -10,7 +10,7 @@ interface CartContextType {
     cartTotal: number;
     setCartCount: (count: number) => void;
     refreshCartCount: () => Promise<void>;
-    addProductToCart: (id: string) => Promise<any>;
+    addProductToCart: (id: string, count?: number) => Promise<any>;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -55,11 +55,11 @@ export default function CartContextProvider({ children }: { children: ReactNode 
         }
     }, [status]);
 
-    const addProductToCart = async (id: string) => {
+    const addProductToCart = async (id: string, count: number = 1) => {
         if (status !== "authenticated") return { status: "error", message: "unauthenticated" };
 
         // ⚡ Optimistic Update: زود الرقم فوراً عشان اليوزر يحس بالسرعة
-        setCartCount((prev) => prev + 1);
+        setCartCount((prev) => prev + count);
 
         try {
             const res = await Addtocard(id);

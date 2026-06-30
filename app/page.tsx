@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from 'react'
-import FeaturedProductsPage from './_componant/FeaturedProducts/FeaturedProducts'
-import MySwiper from './_componant/Swiper/Swiper'
+import FeaturedProductsPage from './_components/FeaturedProducts/FeaturedProducts'
+import MySwiper from './_components/Swiper/Swiper'
 import img1 from'../assets/images/images.png'
 import img3 from'../assets/images/images1.png'
 import img2 from '../assets/images/download (1).png'
 
-//import HomeCategories from './_componant/HomeCategories/HomeCategories'
-const HomeCategorieslazy= lazy(() => import("./_componant/HomeCategories/HomeCategories"))
+//import HomeCategories from './_components/HomeCategories/HomeCategories'
+const HomeCategorieslazy= lazy(() => import("./_components/HomeCategories/HomeCategories"))
 export default function home() {
   return (
     <>

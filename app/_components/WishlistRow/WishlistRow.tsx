@@ -3,7 +3,7 @@ import React from 'react'
 import { ShoppingCart, Check, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { useCart } from '@/Context/CartContext'
-import { Addtocard } from "@/actions/card.actions"
+import { Addtocard } from "@/actions/cart.actions"
 import { toast } from 'sonner'
 
 export default function WishlistRow({ product, removeItem }: { product: any, removeItem: (id: string) => void }) {

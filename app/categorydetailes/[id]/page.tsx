@@ -2,8 +2,8 @@ import React from 'react'
 import { ChevronLeft, ShoppingCart, Star } from 'lucide-react'
 import Link from 'next/link';
 import Image from 'next/image';
-import ProductCard from '@/app/_componant/ProductCard/ProductCard';
-import { Product } from '@/api/routemisr.type/routemisr.type';
+import ProductCard from '@/app/_components/ProductCard/ProductCard';
+import { Product } from '@/api/routemisr.types/routemisr.types';
 
 export default async function CategoryDetails({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;

@@ -15,7 +15,7 @@ export async function ApiToken() {
 
     if (!apiToken) {
         console.log("❌ Token not found in decoded object");
-        return { status: "fail", message: "Unauthorized" };
+        return null;
     }
     return apiToken
 }

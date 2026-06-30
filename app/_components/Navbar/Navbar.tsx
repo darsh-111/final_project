@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import NextLink from 'next/link';
-import { getallcategories } from '@/api/routemisr.service/routemisr.servece';
-import { Category } from '../../../api/routemisr.type/routemisr.type';
+import { getallcategories } from '@/api/routemisr.service/routemisr.service';
+import { Category } from '../../../api/routemisr.types/routemisr.types';
 
 import {
     ShoppingCart, Heart, Menu, Search, X, ChevronRight, LogOut,

@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";5
+import { Input } from "@/components/ui/input";
 import { onSubmit } from "@/actions/auth.actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -109,7 +109,7 @@ delivered right to their doorstep.          </p>
           {/* رأس الكارت (الصورة + الاسم + النجوم) */}
           <div className="flex items-center gap-4 mb-5">
             <Image
-              src="/public/7be87acff8878d0ff905ef9dcd5bf7d2fd7a6c6f.png" // الصورة الحقيقية من FreshCart
+              src="/7be87acff8878d0ff905ef9dcd5bf7d2fd7a6c6f.png" // الصورة الحقيقية من FreshCart
               alt="Sarah Johnson"
               width={65} // الحجم زي الصورة
               height={65}

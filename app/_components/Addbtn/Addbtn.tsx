@@ -24,7 +24,7 @@ export default function Addbtn({ id, count = 1, classs, word }: AddbtnProps) {
 
         setLoading(true);
         try {
-            const response = await addProductToCart(id);
+            const response = await addProductToCart(id, count);
             if (response?.status === "success") {
                 toast.success('Added to cart! 🔥', { position: "top-center" });
             } else {

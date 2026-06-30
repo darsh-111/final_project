@@ -4,7 +4,7 @@ import { GetProductsByBrand } from "@/actions/brands.actions";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Home, ChevronRight, RefreshCw, PackageOpen, X } from "lucide-react";
-import ProductCard from "@/app/_componant/ProductCard/ProductCard";
+import ProductCard from "@/app/_components/ProductCard/ProductCard";
 import Link from "next/link";
 
 export default function BrandProductsPage() {

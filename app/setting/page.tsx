@@ -1,35 +1,20 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useSession } from "next-auth/react"
 import { UpdateUserData, UpdateUserPassword } from "../../actions/userData.actions"
 import { Button } from "@/components/ui/button"
 import { User, Mail, Phone, Lock, Loader2, ShieldCheck, KeyRound, Eye, EyeOff } from "lucide-react"
-import { ProfileSidebar } from "../_componant/Profile/Sidebar"
+import { ProfileSidebar } from "../_components/Profile/Sidebar"
 import { toast } from "sonner"
 
 export default function SettingsPage() {
+  const { data: session } = useSession()
   const [profileLoading, setProfileLoading] = useState(false)
   const [passLoading, setPassLoading] = useState(false)
   const [showPass, setShowPass] = useState({ current: false, new: false, re: false })
 
-  const [profileData, setProfileData] = useState({ name: '', email: '', phone: '' })
+  const [profileData, setProfileData] = useState({ name: session?.user?.name || '', email: session?.user?.email || '', phone: '' })
   const [passData, setPassData] = useState({ currentPassword: '', password: '', rePassword: '' })
-
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const savedUser = localStorage.getItem("userObject");
-        if (savedUser) {
-          const user = JSON.parse(savedUser);
-          setProfileData({
-            name: user.name || '',
-            email: user.email || '',
-            phone: user.phone || ''
-          });
-        }
-      } catch (error) { console.error("Error loading user data:", error); }
-    };
-    fetchInitialData();
-  }, []);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +22,6 @@ export default function SettingsPage() {
     const res = await UpdateUserData(profileData);
     if (res.status === "success") {
       toast.success("Profile updated successfully");
-      localStorage.setItem("userObject", JSON.stringify(res.data));
     } else { toast.error(res.message || "Update failed"); }
     setProfileLoading(false);
   }
@@ -99,7 +83,7 @@ export default function SettingsPage() {
                   <label className={labelStyle}>Email Address</label>
                   <div className={inputWrapper}>
                     <Mail className={iconStyle} size={18} />
-                    <input required type="email" value={profileData.email} onChange={(e) => setProfileData({ ...profileData, email: e.target.value })} className={inputStyle} placeholder="mail@example.com" />
+                    <input disabled type="email" value={profileData.email} className={`${inputStyle} opacity-60 cursor-not-allowed`} placeholder="mail@example.com" />
                   </div>
                 </div>
 

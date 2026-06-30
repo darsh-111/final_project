@@ -4,8 +4,8 @@ import { GetUserAddresses, RemoveAddress, AddAddress, UpdateAddress } from "@/ac
 import { Button } from "@/components/ui/button"
 import { Plus, User, MapPin, X, Loader2 } from "lucide-react"
 import Link from "next/link"
-import { ProfileSidebar } from "../_componant/Profile/Sidebar"
-import { AddressCard } from "../_componant/Profile/AddressCard"
+import { ProfileSidebar } from "../_components/Profile/Sidebar"
+import { AddressCard } from "../_components/Profile/AddressCard"
 import { toast } from "sonner"
 
 export default function MyAddressesPage() {

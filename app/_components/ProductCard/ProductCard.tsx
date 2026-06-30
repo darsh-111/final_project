@@ -1,5 +1,5 @@
 "use client"
-import { Product } from "@/api/routemisr.type/routemisr.type";
+import { Product } from "@/api/routemisr.types/routemisr.types";
 import { Heart, Eye, RefreshCw, Star } from "lucide-react";
 import Addbtn from './../Addbtn/Addbtn';
 import { useWishlist } from "@/Context/wishlistContext";

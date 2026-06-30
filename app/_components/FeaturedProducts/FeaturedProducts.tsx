@@ -1,5 +1,5 @@
-import { Product } from '../../../api/routemisr.type/routemisr.type';
-import { getProducts } from "@/api/routemisr.service/routemisr.servece";
+import { Product } from '../../../api/routemisr.types/routemisr.types';
+import { getProducts } from "@/api/routemisr.service/routemisr.service";
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
 

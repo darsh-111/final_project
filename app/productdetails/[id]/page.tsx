@@ -1,9 +1,9 @@
 import React from 'react'
 import { Star, Truck, Share2, RotateCcw, Award, Check, ChevronRight } from 'lucide-react'
 import Link from 'next/link';
-import { getProductDetails } from '@/api/routemisr.service/routemisr.servece';
-import WishlistBtn from '@/app/_componant/Addbtn/WishlistBtn';
-import QuantitySelector from '@/app/_componant/QuantitySelector/QuantitySelector';
+import { getProductDetails } from '@/api/routemisr.service/routemisr.service';
+import WishlistBtn from '@/app/_components/Addbtn/WishlistBtn';
+import QuantitySelector from '@/app/_components/QuantitySelector/QuantitySelector';
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;

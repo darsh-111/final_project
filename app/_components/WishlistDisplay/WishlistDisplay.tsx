@@ -2,7 +2,7 @@
 import React, { useTransition, useState, useEffect } from 'react'
 import { Trash2, ShoppingCart, Heart, ArrowRight, Loader2 } from "lucide-react";
 import { RemoveFromWishlist } from "@/actions/wishlist.actions";
-import { Addtocard } from "@/actions/card.actions";
+import { Addtocard } from "@/actions/cart.actions";
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { useWishlist } from '@/Context/wishlistContext';

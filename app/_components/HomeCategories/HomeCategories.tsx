@@ -1,6 +1,6 @@
 import React from 'react'
-import { Category } from '../../../api/routemisr.type/routemisr.type';
-import { getallcategories } from '@/api/routemisr.service/routemisr.servece';
+import { Category } from '../../../api/routemisr.types/routemisr.types';
+import { getallcategories } from '@/api/routemisr.service/routemisr.service';
 import Link from 'next/link';
 
 //https://ecommerce.routemisr.com/api/v1/categories
